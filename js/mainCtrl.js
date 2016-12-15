@@ -12,7 +12,8 @@ angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
         {field: 'AlbumArt', displayName: 'Album Art', width: '110px', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><img src="{{row.getProperty(col.field)}}"></div>'},
         {field: 'Type', displayName: 'Type'},
         {field: 'CollectionPrice', displayName: 'Collection Price'},
-      ]
+      ],
+      filterOptions: { filterText: 'search'}
   };
 
   //Our controller is what's going to connect our 'heavy lifting' itunesService with our view (index.html) so our user can see the results they get back from itunes.

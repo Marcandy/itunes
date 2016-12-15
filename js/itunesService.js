@@ -25,6 +25,7 @@ angular.module('itunes').service('itunesService', function($http, $q){
             CollectionPrice: elm.collectionPrice,
             Play: elm.previewUrl,
             Type: elm.kind
+            
           }
         })
 
