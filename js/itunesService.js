@@ -13,18 +13,22 @@ angular.module('itunes').service('itunesService', function($http, $q){
       var deferred = $q.defer();
 
       $http({
-        method: 'jsonp',
+        method: 'JSONP',
         url: baseUrl + name + '&callback=JSON_CALLBACK'
       }).then(function (response) {
-        // var parsedSongs = response.data.map(function(elm, i, arr) {
-        //   return {
-        //     AlbumArt: elm.AlbumArt,
-        //     Arist: elm.name,
-        //     Collection: elm.Collection,
-        //     Collection:
-        //   }
 
-        deferred.resolve(response.data)
+        var parsedSongs = response.data.results.map(function(elm, i, arr) {
+          return {
+            AlbumArt: elm.artworkUrl100,
+            Artist: elm.artistName,
+            Collection: elm.collectionName,
+            CollectionPrice: elm.collectionPrice,
+            Play: elm.previewUrl,
+            Type: elm.kind
+          }
+        })
+
+        deferred.resolve(parsedSongs)
       })
 
       return deferred.promise;
@@ -45,6 +49,7 @@ angular.module('itunes').service('itunesService', function($http, $q){
   */
   //the iTunes API is going to give you a lot more details than ng-grid wants. Create a new array and then loop through the iTunes data pushing into your new array objects that look like the above data. Make sure your method returns this finalized array of data.
   // When this is complete, head back to your controller.
+
 
 
 });
