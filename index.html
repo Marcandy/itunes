@@ -20,7 +20,8 @@
               <input type="text" class="form-control" ng-model="artist" placeholder="Artist Name" >
               <button class="btn btn-primary" ng-click="getSongData(artist)"> Submit </button>
 
-              <input ng-model='search' class="form-control" type="text" placeholder="filter">
+              <input ng-model='filterOptions.filterText' class="form-control" type="text" placeholder="filter">
+              <!--  added filter with for ng grid-->
 
             </div>
           </form>
