@@ -12,9 +12,18 @@ angular.module('itunes').service('itunesService', function($http, $q){
     this.getArtist = function(name) {
       var deferred = $q.defer();
 
-      $http.jsonp(
-  'https://itunes.apple.com/search?term=' + name + '&callback=JSON_CALLBACK'
-      ).then(function (response) {
+      $http({
+        method: 'jsonp',
+        url: baseUrl + name + '&callback=JSON_CALLBACK'
+      }).then(function (response) {
+        // var parsedSongs = response.data.map(function(elm, i, arr) {
+        //   return {
+        //     AlbumArt: elm.AlbumArt,
+        //     Arist: elm.name,
+        //     Collection: elm.Collection,
+        //     Collection:
+        //   }
+
         deferred.resolve(response.data)
       })
 
