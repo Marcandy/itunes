@@ -11,12 +11,12 @@ angular.module('itunes').service('itunesService', function($http, $q){
 
     this.getArtist = function(artist, typeFilter) {
       var deferred = $q.defer();
-      var media = '';
-      if (typeFilter) {
-        media = '&media='+typeFilter;
-      }else {
-        media = '&media=all';
-      }
+      var media = typeFilter ? '&media='+typeFilter : '&media=all';
+      // if (typeFilter) {
+      //   media = '&media='+typeFilter;
+      // }else {
+      //   media = '&media=all';
+      // }
 
 
       $http({
