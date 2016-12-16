@@ -1,6 +1,12 @@
 angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
   //This is setting up the default behavior of our ng-grid. The important thing to note is the 'data' property. The value is 'songData'. That means ng-grid is looking for songData on $scope and is putting whatever songData is into the grid.
   //This means when you make your iTunes request, you'll need to get back the information, parse it accordingly, then set it to songData on the scope -> $scope.songData = ...
+
+  $scope.filterOptions = {
+    filterText: ''
+  };
+
+// may have to update grid inorder to make type of data workd in conjuction with artist name
   $scope.gridOptions = {
       data: 'songData',
       height: '110px',
@@ -12,7 +18,8 @@ angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
         {field: 'AlbumArt', displayName: 'Album Art', width: '110px', cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><img src="{{row.getProperty(col.field)}}"></div>'},
         {field: 'Type', displayName: 'Type'},
         {field: 'CollectionPrice', displayName: 'Collection Price'},
-      ]
+      ],
+      filterOptions: $scope.filterOptions
   };
 
   //Our controller is what's going to connect our 'heavy lifting' itunesService with our view (index.html) so our user can see the results they get back from itunes.
@@ -25,8 +32,10 @@ angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
   //Also note that that method should be retuning a promise, so you could use .then in this function.
 
     //Code here
-  $scope.getSongData = function (artist) {
-    itunesService.getArtist(artist).then(function (songs) {
+  $scope.getSongData = function ( typeOfData) {
+    $scope.filterOptions.filterText = '';
+    itunesService.getArtist($scope.artist, typeOfData ).then(function (songs) {
+      //we are scoping artistName directly to get 
       console.log(songs);
       $scope.songData = songs;
     })
