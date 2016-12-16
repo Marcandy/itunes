@@ -9,12 +9,19 @@ angular.module('itunes').service('itunesService', function($http, $q){
 
     //Code here
 
-    this.getArtist = function(name) {
+    this.getArtist = function(artist, typeFilter) {
       var deferred = $q.defer();
+      var media = '';
+      if (typeFilter) {
+        media = '&media='+typeFilter;
+      }else {
+        media = '&media=all';
+      }
+
 
       $http({
         method: 'JSONP',
-        url: baseUrl + name + '&callback=JSON_CALLBACK'
+        url: baseUrl + artist + media + '&callback=JSON_CALLBACK'
       }).then(function (response) {
 
         var parsedSongs = response.data.results.map(function(elm, i, arr) {
@@ -25,7 +32,7 @@ angular.module('itunes').service('itunesService', function($http, $q){
             CollectionPrice: elm.collectionPrice,
             Play: elm.previewUrl,
             Type: elm.kind
-            
+
           }
         })
 

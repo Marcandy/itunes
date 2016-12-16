@@ -18,6 +18,18 @@
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
               <input type="text" class="form-control" ng-model="artist" placeholder="Artist Name" >
+              <select class="form-control" ng-model='typeOfData' ng-change="getSongData(typeOfData)">
+
+                <option value selected>All</option>
+                <option value="musicVideo" selected>Music Video</option>
+                <option value="movie">Movie</option>
+                <option value="music">Music</option>
+                <option value="podcast">Podcast</option>
+                <option value="tvShow">tvShow</option>
+                <option value="audiobook">Audiobook</option>
+                <option value="ebook">Ebook</option>
+
+              </select>
               <button class="btn btn-primary" ng-click="getSongData(artist)"> Submit </button>
 
               <input ng-model='filterOptions.filterText' class="form-control" type="text" placeholder="filter">

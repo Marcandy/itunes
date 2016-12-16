@@ -31,8 +31,9 @@ angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
   //Also note that that method should be retuning a promise, so you could use .then in this function.
 
     //Code here
-  $scope.getSongData = function (artist) {
-    itunesService.getArtist(artist).then(function (songs) {
+  $scope.getSongData = function (artist, typeFilter) {
+    $scope.filterOptions.filterText = '';
+    itunesService.getArtist(artist, typeFilter ).then(function (songs) {
       console.log(songs);
       $scope.songData = songs;
     })
