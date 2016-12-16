@@ -6,6 +6,7 @@ angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
     filterText: ''
   };
 
+// may have to update grid inorder to make type of data workd in conjuction with artist name
   $scope.gridOptions = {
       data: 'songData',
       height: '110px',
@@ -31,9 +32,10 @@ angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
   //Also note that that method should be retuning a promise, so you could use .then in this function.
 
     //Code here
-  $scope.getSongData = function (artist, typeFilter) {
+  $scope.getSongData = function ( typeOfData) {
     $scope.filterOptions.filterText = '';
-    itunesService.getArtist(artist, typeFilter ).then(function (songs) {
+    itunesService.getArtist($scope.artist, typeOfData ).then(function (songs) {
+      //we are scoping artistName directly to get 
       console.log(songs);
       $scope.songData = songs;
     })
